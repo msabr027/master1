@@ -1,14 +1,11 @@
-from flask import Flask
-from flask_restful import Resource, Api
+import flask
 
-app = Flask(__name__)
-api = Api(app)
+app = flask.Flask(__name__)
+app.config["DEBUG"] = True
 
-class HelloWorld(Resource):
-    def get(self):
-        return {'hello': 'world'}
 
-api.add_resource(HelloWorld, '/')
+@app.route('/', methods=['GET'])
+def home():
+    return "<h1>Distant Reading Archive</h1><p>This site is a prototype API for distant reading of science fiction novels.</p>"
 
-if __name__ == '__main__':
-    app.run(debug=True, host='0.0.0.0')
+app.run()
